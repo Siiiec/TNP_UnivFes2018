@@ -3,6 +3,8 @@ using System.Collections;
 
 public class StageDirector2 : MonoBehaviour
 {
+    public Transform crsParent;
+
     // Control options.
     public bool ignoreFastForward = true;
 
@@ -29,7 +31,7 @@ public class StageDirector2 : MonoBehaviour
     void Awake()
     {
         // Instantiate the prefabs.
-        musicPlayer = (GameObject)Instantiate(musicPlayerPrefab);
+        musicPlayer = (GameObject)Instantiate(musicPlayerPrefab, crsParent);
 
         //var cameraRig = (GameObject)Instantiate(mainCameraRigPrefab);
         //mainCameraSwitcher = cameraRig.GetComponentInChildren<CameraSwitcher>();
@@ -37,13 +39,13 @@ public class StageDirector2 : MonoBehaviour
 
         objectsNeedsActivation = new GameObject[prefabsNeedsActivation.Length];
         for (var i = 0; i < prefabsNeedsActivation.Length; i++)
-            objectsNeedsActivation[i] = (GameObject)Instantiate(prefabsNeedsActivation[i]);
+            objectsNeedsActivation[i] = (GameObject)Instantiate(prefabsNeedsActivation[i], crsParent);
 
         objectsOnTimeline = new GameObject[prefabsOnTimeline.Length];
         for (var i = 0; i < prefabsOnTimeline.Length; i++)
-            objectsOnTimeline[i] = (GameObject)Instantiate(prefabsOnTimeline[i]);
+            objectsOnTimeline[i] = (GameObject)Instantiate(prefabsOnTimeline[i], crsParent);
 
-        foreach (var p in miscPrefabs) Instantiate(p);
+        foreach (var p in miscPrefabs) Instantiate(p, crsParent);
     }
 
     void Update()
